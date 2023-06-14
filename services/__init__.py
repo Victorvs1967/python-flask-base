@@ -1,4 +1,5 @@
 from flask import Request
+from werkzeug.security import check_password_hash
 
 from app import db
 from models import User
@@ -44,3 +45,16 @@ def get_user(id: str) -> User:
 def users_list():
   users = db.user.find({})
   return list(users)
+
+# Auth services
+def authenticate(username, password):
+  user = db.user.find_one({ 'username': username })
+  if user and check_password_hash(user.get('password'), password):
+    return user
+  return None
+
+def is_exist(key: str, value: str):
+  user = db.user.find_one({ key: value })
+  if user:
+    return True
+  return False

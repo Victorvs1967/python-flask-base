@@ -17,7 +17,6 @@ services:
     build: .
     container_name: flask_container
     environment:
-      - FLASK_ENV=development
       - PYTHONUNBUFFERED=True
     restart: on-failure
     volumes:
