@@ -12,3 +12,13 @@ class User:
 
   def set_id(self, id):
     self._id = id
+
+class Book:
+  def __init__(self, title: str, author: str, year: str):
+    self._id = str(uuid1().hex)
+    self.title = title
+    self.author = author
+    self.year = year
+
+  def set_id(self, id):
+    self.id = id

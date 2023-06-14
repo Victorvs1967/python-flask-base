@@ -2,8 +2,10 @@ from flask import Request
 from werkzeug.security import check_password_hash
 
 from app import db
-from models import User
+from models import Book, User
 
+
+######## User Servises ############
 
 # Create User
 def create_user(request: Request):
@@ -45,6 +47,44 @@ def get_user(id: str) -> User:
 def users_list():
   users = db.user.find({})
   return list(users)
+
+######## Books Servises ############
+
+# Create Book
+def create_book(request: Request):
+  book = Book(
+    request.json['title'],
+    request.json['author'],
+    request.json['year']
+  )
+  db.book.insert_one(book.__dict__)
+  return book
+
+# Update Book details
+def edit_book(id: str, request: Request):
+  book = User(
+    request.json['title'],
+    request.json['author'],
+    request.json['year'],
+  )
+  book.set_id(id)
+  db.book.replace_one({ '_id': id }, book.__dict__)
+  return book
+
+# Delete Book from database
+def delete_book(id: str):
+  result = db.dook.delete_one({ '_id': id })
+  return result
+
+# Get Book details from database using user_id
+def get_book(id: str) -> Book:
+  book = db.book.find_one({ '_id': id })
+  return book
+
+# Get Book list from database
+def books_list():
+  books = db.book.find({})
+  return list(books)
 
 # Auth services
 def authenticate(username, password):
