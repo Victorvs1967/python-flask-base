@@ -1,8 +1,8 @@
 from flask import request
-from flask_jwt_extended import JWTManager, create_access_token
-from flask_restful import Resource
-from werkzeug.security import check_password_hash
 from flask_cors import CORS
+from flask_restful import Resource
+from flask_jwt_extended import JWTManager, create_access_token
+from werkzeug.security import check_password_hash
 
 from app import app, api, db
 from services import create_user
@@ -34,21 +34,14 @@ class Login(Resource):
 
 class Signup(Resource):
   def post(self):
-    if self.user_exist() or self.email_exist():
+    if self.is_exist('username') or self.is_exist('email'):
       return { 'error': 'Username or email already exist.' }
     user = create_user(request=request)
     return user.__dict__
 
-  def user_exist(self):
-    username = request.json['username']
-    user = db.user.find_one({ 'username': username })
-    if user:
-      return True
-    return False
-
-  def email_exist(self):
-    email = request.json['email']
-    user = db.user.find_one({ 'email': email })
+  def is_exist(self, key: str):
+    username = request.json[key]
+    user = db.user.find_one({ key: username })
     if user:
       return True
     return False
