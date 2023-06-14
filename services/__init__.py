@@ -4,6 +4,7 @@ from app import db
 from models import User
 
 
+# Create User
 def create_user(request: Request):
   user = User(
     request.json['username'],
@@ -15,6 +16,7 @@ def create_user(request: Request):
   db.user.insert_one(user.__dict__)
   return user
 
+# Update User details (w/o password)
 def edit_user(id: str, request: Request):
   user_db = db.user.find_one({ '_id': id })
   user = User(
@@ -28,14 +30,17 @@ def edit_user(id: str, request: Request):
   db.user.replace_one({ '_id': id }, user.__dict__)
   return user
 
+# Delete User from database
 def delete_user(id: str):
   result = db.user.delete_one({ '_id': id })
   return result
 
+# Get User details from database using user_id
 def get_user(id: str) -> User:
   user = db.user.find_one({ '_id': id })
   return user
 
+# Get Users list from database
 def users_list():
   users = db.user.find({})
   return list(users)

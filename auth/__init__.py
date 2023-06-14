@@ -20,7 +20,7 @@ class Login(Resource):
     user = self.authenticate(username, password)
     if user:
       token = create_access_token(identity={
-        'username': user.get('username'),
+        'username': username,
         'role': 'admin',
       }, expires_delta=False)
       return { 'token': token }
@@ -46,5 +46,5 @@ class Signup(Resource):
       return True
     return False
 
-api.add_resource(Login, '/login')
-api.add_resource(Signup, '/signup')
+api.add_resource(Login, '/auth/login')
+api.add_resource(Signup, '/auth/signup')
