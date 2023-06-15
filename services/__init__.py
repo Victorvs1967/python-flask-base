@@ -62,7 +62,7 @@ def create_book(request: Request):
 
 # Update Book details
 def edit_book(id: str, request: Request):
-  book = User(
+  book = Book(
     request.json['title'],
     request.json['author'],
     request.json['year'],
@@ -73,7 +73,7 @@ def edit_book(id: str, request: Request):
 
 # Delete Book from database
 def delete_book(id: str):
-  result = db.dook.delete_one({ '_id': id })
+  result = db.book.delete_one({ '_id': id })
   return result
 
 # Get Book details from database using user_id

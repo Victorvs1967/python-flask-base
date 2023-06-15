@@ -21,4 +21,4 @@ class Book:
     self.year = year
 
   def set_id(self, id):
-    self.id = id
+    self._id = id

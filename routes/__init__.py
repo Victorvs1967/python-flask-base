@@ -14,4 +14,4 @@ api.add_resource(User, '/api/users/<id>')
 
 # Books routes
 api.add_resource(Books, '/api/books')
-# api.add_resource(Book, '/api/books/<id>')
+api.add_resource(Book, '/api/books/<id>')
