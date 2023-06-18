@@ -9,7 +9,7 @@ config = {
   'password': ''
 }
 
-class Connection:
+class Client:
   def __new__(cls, database):
-    connection = MongoClient(**config)
-    return connection[database]
+    client = MongoClient(**config)
+    return client[database]

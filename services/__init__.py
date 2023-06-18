@@ -16,8 +16,7 @@ def create_user(request: Request):
     request.json['first_name'],
     request.json['last_name'],
   )
-  db.user.insert_one(user.__dict__)
-  return user
+  return db.user.insert_one(user.__dict__)
 
 # Update User details (w/o password)
 def edit_user(id: str, request: Request):
@@ -30,23 +29,20 @@ def edit_user(id: str, request: Request):
     request.json['last_name']
   )
   user.set_id(id)
-  db.user.replace_one({ '_id': id }, user.__dict__)
+  db.user.update_one({ '_id': id }, { '$set': user.__dict__ })
   return user
 
 # Delete User from database
 def delete_user(id: str):
-  result = db.user.delete_one({ '_id': id })
-  return result
+  return db.user.delete_one({ '_id': id })
 
 # Get User details from database using user_id
 def get_user(id: str) -> User:
-  user = db.user.find_one({ '_id': id })
-  return user
+  return db.user.find_one({ '_id': id })
 
 # Get Users list from database
 def users_list():
-  users = db.user.find({})
-  return list(users)
+  return list(db.user.find({}))
 
 ######## Books Servises ############
 
@@ -68,23 +64,20 @@ def edit_book(id: str, request: Request):
     request.json['year'],
   )
   book.set_id(id)
-  db.book.replace_one({ '_id': id }, book.__dict__)
+  db.book.update_one({ '_id': id }, {'$set': book.__dict__})
   return book
 
 # Delete Book from database
 def delete_book(id: str):
-  result = db.book.delete_one({ '_id': id })
-  return result
+  return db.book.delete_one({ '_id': id })
 
 # Get Book details from database using user_id
 def get_book(id: str) -> Book:
-  book = db.book.find_one({ '_id': id })
-  return book
+  return db.book.find_one({ '_id': id })
 
 # Get Book list from database
 def books_list():
-  books = db.book.find({})
-  return list(books)
+  return list(db.book.find({}))
 
 # Auth services
 def authenticate(username, password):

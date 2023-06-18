@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_restful import Api
 
-from db import Connection
+from db import Client
+
 
 app = Flask(__name__)
+db = Client('users_db')
 api = Api(app)
-db = Connection('users_db')
+
 
 from auth import *
-from users import *
 from routes import *
+from users import *
