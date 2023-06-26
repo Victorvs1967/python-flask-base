@@ -18,7 +18,7 @@ def create_user(request: Request) -> User:
     request.json['last_name'],
   )
   db.user.insert_one(user.__dict__)
-  return user.__dict__
+  return user
 
 # Update User details (w/o password)
 def edit_user(id: str, request: Request) -> User:
@@ -31,7 +31,6 @@ def edit_user(id: str, request: Request) -> User:
     request.json['first_name'],
     request.json['last_name']
   )
-  # user.set_id(id)
   db.user.update_one({ '_id': ObjectId(id) }, { '$set': user.__dict__ })
   return user
 
@@ -75,7 +74,6 @@ def edit_book(id: str, request: Request):
     request.json['author'],
     request.json['year'],
   )
-  # book.set_id(id)
   db.book.update_one({ '_id': ObjectId(id) }, {'$set': book.__dict__})
   return book
 

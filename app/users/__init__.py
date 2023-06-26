@@ -21,6 +21,7 @@ class User(Resource):
   def put(self, id):
     user = edit_user(id, request)
     if user:
+      user['_id'] = str(user['_id'])
       return user.__dict__
     return { 'error': 'User not found.' }
 
@@ -28,5 +29,6 @@ class User(Resource):
   def get(self, id):
     user = get_user(id)
     if user:
-      return user
+      user['_id'] = str(user['_id'])
+      return user.__dict__
     return { 'error': 'User not found.' }
