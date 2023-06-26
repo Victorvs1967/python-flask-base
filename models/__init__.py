@@ -1,9 +1,9 @@
-from uuid import uuid1
+# from uuid import uuid1
 from werkzeug.security import generate_password_hash
 
 class User:
   def __init__(self, username: str, password: str, email: str, first_name: str, last_name: str):
-    self._id = str(uuid1().hex)
+    # self._id = str(uuid1().hex)
     self.username = username
     self.password = generate_password_hash(password)
     self.email = email
@@ -15,7 +15,7 @@ class User:
 
 class Book:
   def __init__(self, title: str, author: str, year: str):
-    self._id = str(uuid1().hex)
+    # self._id = str(uuid1().hex)
     self.title = title
     self.author = author
     self.year = year

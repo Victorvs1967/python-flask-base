@@ -1,3 +1,4 @@
+from flask import g
 from pymongo import MongoClient
 
 
@@ -13,3 +14,8 @@ class Client:
   def __new__(cls, database):
     client = MongoClient(**config)
     return client[database]
+
+def get_db():
+  if 'db' not in g:
+    g.db = Client('users_db')
+  return g.db
