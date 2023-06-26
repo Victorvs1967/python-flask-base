@@ -1,9 +1,9 @@
 from flask_restful import Api
 
 from app import app
-from auth import Login, Signup
-from books import Book, Books
-from users import User, Users
+from app.auth import Login, Signup
+from app.books import Book, Books
+from app.users import User, Users
 
 
 api = Api(app)

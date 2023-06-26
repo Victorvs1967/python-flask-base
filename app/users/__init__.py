@@ -2,7 +2,7 @@ from flask_jwt_extended import jwt_required
 from flask_restful import Resource
 from flask import request
 
-from services import delete_user, edit_user, get_user, users_list
+from app.services import delete_user, edit_user, get_user, users_list
 
 
 class Users(Resource):

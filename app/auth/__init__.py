@@ -4,7 +4,7 @@ from flask_restful import Resource
 from flask_jwt_extended import JWTManager, create_access_token
 
 from app import app
-from services import create_user, authenticate, is_exist
+from app.services import create_user, authenticate, is_exist
 
 
 # secret string generated with code: node -e "console.log(require('crypto').randomBytes(256).toString('base64'));"

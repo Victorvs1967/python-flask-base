@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource
 from flask_jwt_extended import jwt_required
 
-from services import books_list, create_book, delete_book, edit_book, get_book
+from app.services import books_list, create_book, delete_book, edit_book, get_book
 
 
 class Books(Resource):
